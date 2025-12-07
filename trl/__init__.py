@@ -20,18 +20,6 @@ from typing import TYPE_CHECKING
 from .import_utils import _LazyModule
 
 
-if sys.version_info[:2] == (3, 9):
-    warnings.warn(
-        (
-            "Support for Python 3.9 will be dropped in the next release "
-            "(after its end-of-life on October 31, 2025). "
-            "Please upgrade to Python 3.10 or newer."
-        ),
-        category=FutureWarning,
-        stacklevel=2,
-    )
-
-
 try:
     __version__ = version("trl")
 except PackageNotFoundError:
@@ -61,7 +49,6 @@ _import_structure = {
         "PreTrainedModelWrapper",
         "clone_chat_template",
         "create_reference_model",
-        "setup_chat_format",
     ],
     "trainer": [
         "AllTrueJudge",
@@ -141,7 +128,6 @@ if TYPE_CHECKING:
         PreTrainedModelWrapper,
         clone_chat_template,
         create_reference_model,
-        setup_chat_format,
     )
     from .scripts import DatasetMixtureConfig, ScriptArguments, TrlParser, get_dataset, init_zero_verbose
     from .trainer import (

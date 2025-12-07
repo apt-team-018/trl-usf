@@ -12,12 +12,14 @@ on:
       - "tests/**.py"
       - "trl/**.py"
       - "pyproject.toml"
+      # Exclude if only experimental code/tests
+      - "!trl/experimental/**"
+      - "!tests/experimental/**"
 
 env:
   TQDM_DISABLE: 1
   CI_SLACK_CHANNEL: ${{ secrets.CI_PUSH_MAIN_CHANNEL }}
   PYTORCH_CUDA_ALLOC_CONF: "expandable_segments:True"
-  TRL_EXPERIMENTAL_SILENCE: 1
 
 jobs:
   check_code_quality:
@@ -38,7 +40,7 @@ jobs:
     name: Tests
     strategy:
       matrix:
-        python-version: ['3.9', '3.10', '3.11', '3.12', '3.13']
+        python-version: ['3.10', '3.11', '3.12', '3.13']
       fail-fast: false
     runs-on:
       group: aws-g4dn-2xlarge
